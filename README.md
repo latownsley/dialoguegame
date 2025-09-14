@@ -1,2 +1,2 @@
 # dialoguegame
-A short dialogue based game inspired by games like Disco Elysium and the Forgotten City
+A short dialogue based game inspired by games like Disco Elysium and the Forgotten City. IN PROGRESS
