@@ -2,11 +2,23 @@ extends CharacterBody3D
 
 @onready var animation_player: AnimationPlayer = $Visuals/player/AnimationPlayer
 
+@onready var visuals: Node3D = $Visuals
+
+@onready var camera_point: Node3D = $CameraPoint
+
 
 const SPEED: float = 5.0
 const JUMP_VELOCITY: float = 4.5
 
 var walking: bool = false
+
+func _ready() -> void:
+	# set Globals
+	GameManager.set_player(self)
+	
+	# Animation Set Ups
+	animation_player.set_blend_time("idle", "walk", 0.2)
+	animation_player.set_blend_time("walk", "idle", 0.2)
 
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
@@ -24,6 +36,9 @@ func _physics_process(delta: float) -> void:
 	if direction:
 		velocity.x = direction.x * SPEED
 		velocity.z = direction.z * SPEED
+		
+		# rotate the visuals towards where the player is going
+		visuals.look_at(direction + position)
 		
 		if !walking:
 			walking = true
