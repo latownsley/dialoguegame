@@ -5,6 +5,8 @@ extends CharacterBody3D
 @onready var visuals: Node3D = $Visuals
 
 @onready var camera_point: Node3D = $CameraPoint
+@onready var interactable_detector: Area3D = $Direction/InteractableDetector
+
 
 
 const SPEED: float = 5.0
@@ -21,6 +23,13 @@ func _ready() -> void:
 	animation_player.set_blend_time("walk", "idle", 0.2)
 
 func _physics_process(delta: float) -> void:
+	# temp dialogue test / if there's an interactable in the box range
+	if Input.is_action_just_pressed("interact"):
+		var interactables = interactable_detector.get_overlapping_areas()
+		if interactables.size() > 0:
+			interactables[0].dialogue_action()
+			return
+	
 	# Add the gravity.
 	if not is_on_floor():
 		velocity += get_gravity() * delta

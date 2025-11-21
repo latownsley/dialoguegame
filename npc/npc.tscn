@@ -1,0 +1,30 @@
+[gd_scene load_steps=7 format=3 uid="uid://357626stetq4"]
+
+[ext_resource type="Script" uid="uid://oappxwe2kpcr" path="res://npc/npc.gd" id="1_2xp5l"]
+[ext_resource type="Script" uid="uid://c5pngkic5c86s" path="res://scripts/state_machine/node_state_machine.gd" id="2_3i1kj"]
+[ext_resource type="Script" uid="uid://vhld8er1n5ev" path="res://npc/idle.gd" id="3_o6cys"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2xp5l"]
+albedo_color = Color(0.09411765, 0.47843137, 0.45490196, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_gfcum"]
+material = SubResource("StandardMaterial3D_2xp5l")
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_gfcum"]
+
+[node name="NPC" type="CharacterBody3D"]
+script = ExtResource("1_2xp5l")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CapsuleMesh_gfcum")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_gfcum")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+
+[node name="StateMachine" type="Node" parent="."]
+script = ExtResource("2_3i1kj")
+
+[node name="Idle" type="Node" parent="StateMachine"]
+script = ExtResource("3_o6cys")

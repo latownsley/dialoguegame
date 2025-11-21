@@ -1,0 +1,28 @@
+[gd_scene load_steps=7 format=3 uid="uid://ixry0ekovea4"]
+
+[ext_resource type="Script" uid="uid://c0d3wqb6040sq" path="res://npc/still_npc.gd" id="1_gkbmj"]
+[ext_resource type="Script" uid="uid://c5pngkic5c86s" path="res://scripts/state_machine/node_state_machine.gd" id="2_2rwsh"]
+[ext_resource type="Script" uid="uid://vhld8er1n5ev" path="res://npc/idle.gd" id="3_3jubr"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2xp5l"]
+albedo_color = Color(0.49441445, 0.34776154, 0.5754235, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_gfcum"]
+material = SubResource("StandardMaterial3D_2xp5l")
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_gfcum"]
+
+[node name="StillNPC" type="CharacterBody3D"]
+script = ExtResource("1_gkbmj")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CapsuleMesh_gfcum")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_gfcum")
+
+[node name="StateMachine" type="Node" parent="."]
+script = ExtResource("2_2rwsh")
+
+[node name="Idle" type="Node" parent="StateMachine"]
+script = ExtResource("3_3jubr")

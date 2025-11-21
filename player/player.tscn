@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=4 uid="uid://bmcfi2nce82sd"]
+[gd_scene load_steps=15 format=4 uid="uid://bmcfi2nce82sd"]
 
 [ext_resource type="Script" uid="uid://do6h5r6huurjf" path="res://player/player.gd" id="1_rkbax"]
 
@@ -3892,6 +3892,9 @@ _data = {
 &"walk": SubResource("Animation_3abpj")
 }
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_oul6g"]
+size = Vector3(1, 1.12, 1)
+
 [node name="Player" type="CharacterBody3D"]
 script = ExtResource("1_rkbax")
 
@@ -4379,3 +4382,13 @@ libraries = {
 
 [node name="CameraPoint" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.7660443, 0.6427875, 0, -0.6427875, 0.7660443, 0, 3.4547477, 2.8244386)
+
+[node name="Direction" type="Marker3D" parent="."]
+
+[node name="InteractableDetector" type="Area3D" parent="Direction"]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Direction/InteractableDetector"]
+transform = Transform3D(1.43, 0, 0, 0, 1.8199999, 0, 0, 0, 1.6800001, 0, 1.0192, 0)
+shape = SubResource("BoxShape3D_oul6g")
